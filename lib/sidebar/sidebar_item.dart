@@ -7,10 +7,10 @@ class SidebarItem extends StatelessWidget {
   final Function onTabTap;
 
   const SidebarItem({
-    Key key,
+    Key? key,
     this.isSelected,
-    this.text,
-    this.onTabTap,
+    required this.text,
+    required this.onTabTap,
   }) : super(key: key);
 
   @override
@@ -18,14 +18,18 @@ class SidebarItem extends StatelessWidget {
     return Transform.rotate(
       angle: -1.58,
       child: GestureDetector(
-        onTap: onTabTap,
+        onTap: () {
+          onTabTap();
+        },
         child: Column(
           children: <Widget>[
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               height: 6,
               width: 6,
-              decoration: BoxDecoration(shape: BoxShape.circle, color: isSelected ? Colors.white : Colors.transparent),
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: isSelected ? Colors.white : Colors.transparent),
             ),
             AnimatedDefaultTextStyle(
               child: Text(
